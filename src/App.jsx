@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react'; // Import useState for managing users state
+import Form from './components/form'; // Import Form component for adding new users
+import List from './components/userList'; // Import List component for displaying users
+import { v4 as uuidv4 } from 'uuid';
 
-function App() {
-  const [count, setCount] = useState(0)
+// App component manages the user list and provides functions for adding, editing, and deleting users
+const App = () => {
+  // State to manage the list of users with initial sample data
+  const [users, setUsers] = useState([
+    { name: "John", email: "john@gmail.com", id: uuidv4() },
+    { name: "Lois", email: "Lois@gmail.com" , id : uuidv4() },
+    { name: "Peter", email: "Peter@gmail.com", id: uuidv4() },
+  ]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  console.log(users);
+  // Function to add a new user to the users list
+  const addNewUser = (newUser) => {
+    setUsers([...users, newUser]); // Append new user to existing list
+  };
+
+  // Function to edit an existing user based on index
+const editUser = (userId, newDetails) =>{
+  let arr = users.map((user)=>{
+    if (user.id == userId){
+        return newDetails
+    }else{
+      return user
+    }
+  })
+  setUsers(arr)
 }
 
-export default App
+ 
+
+  // Function to delete a user based on index
+ const deleteUser = (userId) =>{
+ let filteredArray = users.filter((user)=>{
+ if (user.id !== userId){
+    return user
+    }
+ })
+ setUsers(filteredArray)
+ }
+
+  return (
+    // Grid layout to display Form and List side by side
+    <div className="grid grid-cols-2">
+      {/* Form component for adding new users */}
+      <Form addUser={addNewUser} />
+      {/* List component to display users, passing users array and edit/delete functions */}
+      <List usersList={users} editedUser={editUser} deletedUser={deleteUser} />
+    </div>
+  );
+};
+
+export default App;
