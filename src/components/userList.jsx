@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Item from './item';
 import useUsersStore from '@/store/useUsersStore';
 
 const List = () => {
   const users = useUsersStore((state) => state.users);
+  const fetchUsers =  useUsersStore((state) => state.fetchUsers)
+
+  useEffect(()=>{
+    fetchUsers();
+  },[fetchUsers])
 
   return (
     <div>
