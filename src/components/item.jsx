@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import useUsersStore from '@/store/useUsersStore';
+import useUsersStore from '@/store/usersStore';
+
 
 const Item = ({ user }) => {
-  const editUser = useUsersStore((state) => state.editUser);
-  const deleteUser = useUsersStore((state) => state.deleteUser);
+ const editUser = useUsersStore((state)=> state.editUser)
+ const deleteUser = useUsersStore((state)=> state.deleteUser)
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(user.name);

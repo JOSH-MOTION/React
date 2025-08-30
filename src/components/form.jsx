@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import useUsersStore from '../store/useUsersStore';
+import useUsersStore from '@/store/usersStore';
+
 
 
 export default function Form() {
-const {addNewUser,users} = useUsersStore()
+
+  const {addNewUser,users} = useUsersStore()
 
 
 const [name,setName] = useState("")

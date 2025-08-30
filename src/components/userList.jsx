@@ -1,9 +1,11 @@
 import React from 'react';
 import Item from './item';
-import useUsersStore from '@/store/useUsersStore';
+import useUsersStore from '@/store/usersStore';
+
 
 const List = () => {
-  const users = useUsersStore((state) => state.users);
+  const users = useUsersStore((state)=> state.users)
+
 
   return (
     <div>
